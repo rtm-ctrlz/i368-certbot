@@ -1,4 +1,4 @@
-FROM lmdcrash/i386-python-alpine:latest
+FROM i386/python:2-alpine
 
 ENTRYPOINT [ "certbot" ]
 EXPOSE 80 443
