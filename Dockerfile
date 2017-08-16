@@ -22,7 +22,6 @@ RUN set -ex; \
 		git ; \
 	\
 	git clone https://github.com/certbot/certbot /opt/certbot.git ;\
-	( cd /opt/certbot.git && git checkout tags $(git tag -l --sort=v:refname | tail -n1) ) ;\
 	\
 	mkdir -p /opt/certbot/src ; \
 	for f in CHANGES.rst README.rst setup.py acme certbot; do mv "/opt/certbot.git/$f" "/opt/certbot/src/$f"; done ; \
