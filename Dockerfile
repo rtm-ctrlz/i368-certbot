@@ -30,7 +30,6 @@ RUN set -ex; \
 	\
 	(find /opt/certbot/src -type d \( -name tests -o -name docs -o -name examples \) -exec rm -rf "{}" \; 2>/dev/null || true ); \
 	\
-	pip install --no-cache-dir idna==2.5 ; \
 	pip install --no-cache-dir \
 		--editable /opt/certbot/src/acme \
 		--editable /opt/certbot/src ; \
