@@ -9,7 +9,7 @@ WORKDIR /opt/certbot
 RUN set -ex; \
 	apk add --no-cache --virtual .certbot-deps \
 		libffi \
-		libssl1.0 \
+		libssl1.1 \
 		ca-certificates \
 		binutils; \
 	\
