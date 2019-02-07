@@ -9,7 +9,7 @@ WORKDIR /opt/certbot
 RUN set -ex; \
 	apk add --no-cache --virtual .certbot-deps \
 		libffi \
-		libssl1.0 \
+		libssl1.1 \
 		ca-certificates \
 		binutils; \
 	\
@@ -22,13 +22,16 @@ RUN set -ex; \
 		git ; \
 	\
 	git clone https://github.com/certbot/certbot /opt/certbot.git ;\
-	\
+    echo "OK"
+RUN set -ex; \
 	mkdir -p /opt/certbot/src ; \
-	for f in CHANGES.rst README.rst setup.py acme certbot; do mv "/opt/certbot.git/$f" "/opt/certbot/src/$f"; done ; \
+    ls -la /opt/certbot.git ; \
+	for f in CHANGELOG.md README.rst setup.py acme certbot; do mv "/opt/certbot.git/$f" "/opt/certbot/src/$f"; done ; \
 	rm -rf /opt/certbot.git ; \
 	\
 	(find /opt/certbot/src -type d \( -name tests -o -name docs -o -name examples \) -exec rm -rf "{}" \; 2>/dev/null || true ); \
 	\
+	pip install -U 'pip<19'; \
 	pip install --no-cache-dir \
 		--editable /opt/certbot/src/acme \
 		--editable /opt/certbot/src ; \
