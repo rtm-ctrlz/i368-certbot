@@ -22,14 +22,15 @@ RUN set -ex; \
 		git ; \
 	\
 	git clone https://github.com/certbot/certbot /opt/certbot.git ;\
-	( cd /opt/certbot.git && git checkout tags $(git tag -l --sort=v:refname | tail -n1) ) ;\
+	( cd /opt/certbot.git && git checkout tags/$(git tag -l --sort=v:refname | tail -n1) ) ;\
 	\
 	mkdir -p /opt/certbot/src ; \
-	for f in CHANGES.rst README.rst setup.py acme certbot; do mv "/opt/certbot.git/$f" "/opt/certbot/src/$f"; done ; \
+	for f in CHANGELOG.md README.rst setup.py acme certbot; do mv "/opt/certbot.git/$f" "/opt/certbot/src/$f"; done ; \
 	rm -rf /opt/certbot.git ; \
 	\
 	(find /opt/certbot/src -type d \( -name tests -o -name docs -o -name examples \) -exec rm -rf "{}" \; 2>/dev/null || true ); \
 	\
+	pip install -U 'pip<19'; \
 	pip install --no-cache-dir \
 		--editable /opt/certbot/src/acme \
 		--editable /opt/certbot/src ; \
